@@ -8,8 +8,13 @@ namespace ClassesAndObjects
     {
         private bool _isRunning = true;
         private readonly List<Consola> _consolas = new List<Consola>();
-        private readonly List<Usuario> _users = new List<Usuario>();
-        private readonly List<Renta> _rentas = new List<Renta>();
+        private readonly List<Client> _clients = new List<Client>();
+        private readonly Renta rents;
+
+        public Program()
+        {
+            rents = new Renta();
+        }
 
         public static void Main(string[] args)
         {
@@ -20,6 +25,7 @@ namespace ClassesAndObjects
         private void Run()
         {
             AddStuff();
+            
             while (_isRunning)
             {
                 PrintMenu();
@@ -49,10 +55,13 @@ namespace ClassesAndObjects
                 }
                 case "2":
                 {
-                    UserSubmenu();
                     return true;
                 }
-                case "3": return true;
+                case "3":
+                {
+                    UserSubmenu();
+                    return true;
+                } 
                 case "4":
                 {
                     Console.WriteLine("Gracias, hasta pronto");
@@ -126,11 +135,11 @@ namespace ClassesAndObjects
             {
                 Console.WriteLine("__________________ Usuarios ________________________");
 
-                var end = Math.Min(_users.Count, selectedIndex + printSize);
+                var end = Math.Min(_clients.Count, selectedIndex + printSize);
                 var start = Math.Max(0, end - printSize);
                 for (int i = start; i < end; i++)
                 {
-                    Console.WriteLine($"{_users[i].Dui}: {_users[i].Name}");
+                    Console.WriteLine($"{_clients[i].Dui}: {_clients[i].Name}");
                 }
 
                 Console.WriteLine("Flechas [Up] [Down] navega, ENTER salir al menu anterior\n\n\n");
@@ -186,12 +195,24 @@ namespace ClassesAndObjects
             _consolas.Add(new Consola("s014", "Play Station", 2.55f));
             _consolas.Add(new Consola("s015", "X Box", 1.75f));
             _consolas.Add(new Consola("s016", "Game Cube Morado", 0.95f));
-            _users.Add(new Usuario{ Dui = "001", Name = "Pedro"});
-            _users.Add(new Usuario{ Dui = "002", Name = "Juan"});
-            _users.Add(new Usuario{ Dui = "003", Name = "Miguel"});
-            _users.Add(new Usuario{ Dui = "004", Name = "Rodolfo"});
-            _users.Add(new Usuario{ Dui = "005", Name = "Augusto"});
-            _users.Add(new Usuario{ Dui = "006", Name = "Jacinto"});
+            _clients.Add(new Client{ Dui = "001", Name = "Pedro"});
+            _clients.Add(new Client{ Dui = "002", Name = "Juan"});
+            _clients.Add(new Client{ Dui = "003", Name = "Miguel"});
+            _clients.Add(new Client{ Dui = "004", Name = "Rodolfo"});
+            _clients.Add(new Client{ Dui = "005", Name = "Augusto"});
+            _clients.Add(new Client{ Dui = "006", Name = "Jacinto"});
+            rents.AddRent(
+                _clients[0],
+                _consolas[0],
+                new DateTime(2022, 1, 1),
+                new DateTime(2022, 1, 15)
+                );
+            rents.AddRent(
+                _clients[0],
+                _consolas[0],
+                new DateTime(2022, 1, 10),
+                new DateTime(2022, 1, 15)
+            );
         }
     }
 }
