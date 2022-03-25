@@ -55,6 +55,7 @@ namespace ClassesAndObjects
                 }
                 case "2":
                 {
+                        rents.ShowMenu();
                     return true;
                 }
                 case "3":
@@ -205,7 +206,7 @@ namespace ClassesAndObjects
                 _clients[0],
                 _consolas[0],
                 new DateTime(2022, 1, 1),
-                new DateTime(2022, 1, 15)
+                new DateTime(2022, 1, 10)
                 );
             rents.AddRent(
                 _clients[0],
