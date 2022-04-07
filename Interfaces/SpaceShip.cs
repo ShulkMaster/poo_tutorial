@@ -6,7 +6,7 @@ namespace Interfaces
 {
     public class SpaceShip
     {
-        private readonly Engine.Engine _engine = new SuperProtonEngine();
+        private Engine.Engine _engine = new AntimatterEngine();
         private IWeaponeable? _weapon;
 
         private const string Model = @"
@@ -53,6 +53,23 @@ namespace Interfaces
 
                         break;
                     }
+                    case ConsoleKey.D3:
+                    {
+                        if(!(_weapon is PlasmaWeapon))
+                        { 
+                            _weapon = new PlasmaWeapon();
+                        }
+                        break;
+                    }
+                    case ConsoleKey.Spacebar:
+                    {
+                        if(!(_engine is ElectonEngine))
+                        {
+                            _engine = new ElectonEngine();
+                        }
+                        break;
+                    } 
+                    
                 }
 
                 Console.WriteLine(_weapon?.Fire());
