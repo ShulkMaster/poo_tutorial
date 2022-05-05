@@ -31,9 +31,10 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.listView1 = new System.Windows.Forms.ListView();
             this.description = new System.Windows.Forms.ColumnHeader();
+            this.date = new System.Windows.Forms.ColumnHeader();
+            this.done = new System.Windows.Forms.ColumnHeader();
             this.InputPanel = new System.Windows.Forms.FlowLayoutPanel();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.label1 = new System.Windows.Forms.Label();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.monthCalendar1 = new System.Windows.Forms.MonthCalendar();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
@@ -42,8 +43,6 @@
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.date = new System.Windows.Forms.ColumnHeader();
-            this.done = new System.Windows.Forms.ColumnHeader();
             this.panel1.SuspendLayout();
             this.InputPanel.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -61,7 +60,6 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(722, 463);
             this.panel1.TabIndex = 0;
-            this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
             // 
             // listView1
             // 
@@ -69,7 +67,9 @@
             this.description,
             this.date,
             this.done});
+            this.listView1.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
             this.listView1.Location = new System.Drawing.Point(0, 204);
+            this.listView1.MultiSelect = false;
             this.listView1.Name = "listView1";
             this.listView1.Size = new System.Drawing.Size(722, 259);
             this.listView1.TabIndex = 2;
@@ -80,6 +80,17 @@
             // description
             // 
             this.description.Text = "Description";
+            this.description.Width = 72;
+            // 
+            // date
+            // 
+            this.date.Text = "Due date";
+            this.date.Width = 90;
+            // 
+            // done
+            // 
+            this.done.Text = "Done";
+            this.done.Width = 90;
             // 
             // InputPanel
             // 
@@ -91,66 +102,58 @@
             this.InputPanel.Controls.Add(this.checkBox1);
             this.InputPanel.Controls.Add(this.SaveBtn);
             this.InputPanel.Location = new System.Drawing.Point(0, 24);
-            this.InputPanel.Margin = new System.Windows.Forms.Padding(25, 3, 3, 3);
+            this.InputPanel.Margin = new System.Windows.Forms.Padding(0);
             this.InputPanel.Name = "InputPanel";
-            this.InputPanel.Padding = new System.Windows.Forms.Padding(25, 0, 0, 0);
-            this.InputPanel.Size = new System.Drawing.Size(722, 180);
+            this.InputPanel.Padding = new System.Windows.Forms.Padding(10);
+            this.InputPanel.Size = new System.Drawing.Size(722, 200);
             this.InputPanel.TabIndex = 1;
-            this.InputPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.InputPanel_Paint);
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Controls.Add(this.textBox1);
-            this.groupBox1.Location = new System.Drawing.Point(28, 3);
+            this.groupBox1.Dock = System.Windows.Forms.DockStyle.Left;
+            this.groupBox1.Location = new System.Drawing.Point(10, 10);
+            this.groupBox1.Margin = new System.Windows.Forms.Padding(0);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(200, 100);
+            this.groupBox1.Size = new System.Drawing.Size(200, 180);
             this.groupBox1.TabIndex = 2;
             this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "groupBox1";
-            this.groupBox1.Enter += new System.EventHandler(this.groupBox1_Enter);
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(25, 19);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(38, 15);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "label1";
+            this.groupBox1.Text = "Descripcion";
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(72, 58);
+            this.textBox1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.textBox1.Location = new System.Drawing.Point(3, 19);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(100, 23);
+            this.textBox1.Size = new System.Drawing.Size(194, 23);
             this.textBox1.TabIndex = 1;
             // 
             // monthCalendar1
             // 
-            this.monthCalendar1.Location = new System.Drawing.Point(240, 9);
+            this.monthCalendar1.Location = new System.Drawing.Point(219, 19);
+            this.monthCalendar1.MaxSelectionCount = 1;
             this.monthCalendar1.Name = "monthCalendar1";
             this.monthCalendar1.TabIndex = 0;
-            this.monthCalendar1.DateChanged += new System.Windows.Forms.DateRangeEventHandler(this.monthCalendar1_DateChanged);
             // 
             // checkBox1
             // 
             this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(500, 3);
+            this.checkBox1.Location = new System.Drawing.Point(479, 13);
             this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(83, 19);
+            this.checkBox1.Size = new System.Drawing.Size(54, 19);
             this.checkBox1.TabIndex = 3;
-            this.checkBox1.Text = "checkBox1";
+            this.checkBox1.Text = "Done";
             this.checkBox1.UseVisualStyleBackColor = true;
             // 
             // SaveBtn
             // 
-            this.SaveBtn.Location = new System.Drawing.Point(589, 3);
+            this.SaveBtn.Location = new System.Drawing.Point(539, 13);
             this.SaveBtn.Name = "SaveBtn";
             this.SaveBtn.Size = new System.Drawing.Size(75, 23);
             this.SaveBtn.TabIndex = 4;
-            this.SaveBtn.Text = "Save";
+            this.SaveBtn.Text = "Add";
             this.SaveBtn.UseVisualStyleBackColor = true;
+            this.SaveBtn.Click += new System.EventHandler(this.SaveBtn_Click);
             // 
             // menuStrip1
             // 
@@ -174,22 +177,16 @@
             // saveToolStripMenuItem
             // 
             this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
-            this.saveToolStripMenuItem.Size = new System.Drawing.Size(98, 22);
+            this.saveToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.saveToolStripMenuItem.Text = "Save";
+            this.saveToolStripMenuItem.Click += new System.EventHandler(this.SaveToolStripMenuItem_Click);
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(98, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.exitToolStripMenuItem.Text = "Exit";
-            // 
-            // date
-            // 
-            this.date.Text = "Due date";
-            // 
-            // done
-            // 
-            this.done.Text = "Done";
+            this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
             // Form1
             // 
@@ -222,7 +219,6 @@
         private ToolStripMenuItem exitToolStripMenuItem;
         private FlowLayoutPanel InputPanel;
         private GroupBox groupBox1;
-        private Label label1;
         private TextBox textBox1;
         private MonthCalendar monthCalendar1;
         private CheckBox checkBox1;

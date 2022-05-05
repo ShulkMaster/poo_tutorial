@@ -44,7 +44,7 @@ namespace Todoer
             return trimmed.Equals("true", StringComparison.CurrentCultureIgnoreCase);
         }
 
-        static IEnumerable<string> Parse(List<Task2> tasks)
+        public static IEnumerable<string> Parse(List<Task2> tasks)
         {
             return tasks.Select(t => $"{t.Name},{t.Done},{t.Date:dd/MM/yyyy}"); ;
         }
