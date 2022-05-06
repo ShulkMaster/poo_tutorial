@@ -1,8 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text.Json;
+﻿using System.Text.Json;
 using Pokedex.Api.Reponses;
+using Pokedex.Api.Request;
+using Microsoft.AspNetCore.WebUtilities;
 
 namespace Pokedex.Api;
 public class PokeApi
@@ -14,9 +13,9 @@ public class PokeApi
     {
         _opt.PropertyNameCaseInsensitive = true;
     }
-    public async Task<PokemonResponse> GetEntriesAsync()
+    public async Task<PokemonResponse> GetEntriesAsync(QueryParams query)
     {
-        string url = "https://pokeapi.co/api/v2/pokemon";
+        string? url = QueryHelpers.AddQueryString(Endpoints.Pokemon.Index, query.AsDictionary());
         var response = await _client.GetStreamAsync(url);
         var pokemons = await JsonSerializer.DeserializeAsync<PokemonResponse>(response, _opt);
         return pokemons ?? new PokemonResponse();

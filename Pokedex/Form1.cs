@@ -1,9 +1,12 @@
-using Pokedex.Api;
+using Pokedex.Repositories;
+using Pokedex.Api.Request;
 
 namespace Pokedex
 {
     public partial class Form1 : Form
     {
+        private int page =  1;
+        private readonly EntryRepo repo = new EntryRepo();
         public Form1()
         {
             InitializeComponent();
@@ -11,14 +14,17 @@ namespace Pokedex
 
         private async void label1_Click(object sender, EventArgs e)
         {
-            var api = new PokeApi();
-            var xd = await api.GetEntriesAsync();
+            var q = new QueryParams();
+            q.SetPage(page);
+            var response = await repo.GetEntriesAsync(q);
             var text = "";
-            foreach (var entry in xd.Results)
+            foreach (var entry in response.Entries)
             {
                 text += $"\n{entry.Name}";
             }
+            label2.Text = $"Pagina {page} of {Math.Ceiling(response.Total / (float) q.Limit)}";
             label1.Text = text;
+            page++;
         }
     }
 }
