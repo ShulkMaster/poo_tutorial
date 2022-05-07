@@ -12,15 +12,15 @@ public class EntryRepo
 
     private List<Entry> ToEntry(List<ApiEntry> list)
     {
-        List<Entry> entries = new List<Entry>(list.Count);
+        var entries = new List<Entry>(list.Count);
         for (int i = 0; i < list.Count; i++)
         {
             ApiEntry entry = list[i];
-            entries[i] = new Entry()
+            entries.Add(new Entry
             {
                 Name = entry.Name,
                 Url = entry.Url,
-            };
+            });
             string[] paths = entry.Url.Split('/');
             bool success = int.TryParse(paths[^2], out int id);
             if (success)
