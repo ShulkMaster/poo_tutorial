@@ -10,7 +10,7 @@ public class EntryRepo
 {
     PokedexContext context = new PokedexContext();
 
-    private List<Entry> ToEntry(List<ApiEntry> list)
+    private static List<Entry> ToEntry(List<ApiEntry> list)
     {
         var entries = new List<Entry>(list.Count);
         for (int i = 0; i < list.Count; i++)
@@ -31,7 +31,7 @@ public class EntryRepo
         return entries;
     }
 
-    public async Task<PokemonList> GetEntriesAsync(QueryParams prams)
+    public async Task<PokemonList> GetEntriesAsync(QueryParams prams, CancellationToken token = default)
     {
         PokemonList p = new PokemonList();
         if (prams.Offset + prams.Limit > p.Total)
@@ -43,7 +43,7 @@ public class EntryRepo
             .Skip(prams.Offset)
             .Take(prams.Limit)
             .OrderBy(e => e.Id)
-            .ToListAsync();
+            .ToListAsync(token);
 
         if (pokes.Any())
         {
@@ -51,11 +51,12 @@ public class EntryRepo
             return p;
         }
         var api = new PokeApi();
-        var result = await api.GetEntriesAsync(prams);
+        var result = await api.GetEntriesAsync(prams, token);
         var list = ToEntry(result.Results);
         context.Entries.AddRange(list);
-        await context.SaveChangesAsync();
+        await context.SaveChangesAsync(token);
         p.Entries = list;
         return p;
     }
+
 }

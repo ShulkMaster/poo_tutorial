@@ -26,5 +26,14 @@ namespace Pokedex
             label1.Text = text;
             page++;
         }
+
+        private void label3_Click(object sender, EventArgs e)
+        {
+            var r = new PokeRepo();
+            var pokemon = r.FindAsync(new Entry {  Id = 25 });
+            pokemon.GetAwaiter().OnCompleted(() => {
+                label3.Text = pokemon?.Result?.Name;
+            });
+        }
     }
 }
