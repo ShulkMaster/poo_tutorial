@@ -9,6 +9,6 @@ namespace Pokedex
         public string Name { get; set; } = null!;
         public string Url { get; set; } = null!;
 
-        public virtual Pokemon Pokemon { get; set; } = null!;
+        public virtual Pokemon? Pokemon { get; set; }
     }
 }

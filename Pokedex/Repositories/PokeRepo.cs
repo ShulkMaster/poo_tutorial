@@ -18,4 +18,9 @@ public class PokeRepo
         return result;
     }
 
+    public async Task<List<>> FetchRange(IEnumerable<Entry> entries, CancellationToken token = default)
+    {
+
+    }
+
 }

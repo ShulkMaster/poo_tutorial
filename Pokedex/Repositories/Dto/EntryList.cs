@@ -1,6 +1,6 @@
 ﻿namespace Pokedex.Repositories.Dto;
 
-public class PokemonList
+public class EntryList
 {
     public List<Entry> Entries { get; set; } = new List<Entry>();
 

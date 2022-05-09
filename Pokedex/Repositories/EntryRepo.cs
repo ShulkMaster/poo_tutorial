@@ -31,9 +31,9 @@ public class EntryRepo
         return entries;
     }
 
-    public async Task<PokemonList> GetEntriesAsync(QueryParams prams, CancellationToken token = default)
+    public async Task<EntryList> GetEntriesAsync(QueryParams prams, CancellationToken token = default)
     {
-        PokemonList p = new PokemonList();
+        EntryList p = new EntryList();
         if (prams.Offset + prams.Limit > p.Total)
         {
             return p;

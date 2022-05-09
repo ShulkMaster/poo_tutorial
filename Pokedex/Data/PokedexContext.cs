@@ -63,12 +63,9 @@ namespace Pokedex
 
                 entity.Property(e => e.Id).ValueGeneratedNever();
 
-                entity.Property(e => e.Type)
+                entity.Property(e => e.FrontDefault)
                     .HasMaxLength(100)
-                    .IsUnicode(false)
-                    .HasColumnName("type");
-
-                entity.Property(e => e.Url).HasMaxLength(500);
+                    .IsUnicode(false);
 
                 entity.HasOne(d => d.IdNavigation)
                     .WithOne(p => p.Sprite)
