@@ -23,6 +23,13 @@ public class QueryParams
         set => _limit = Math.Abs(value);
     }
 
+    public QueryParams() { }
+
+    public QueryParams(int limit)
+    {
+        Limit = limit;
+    }
+
     public void SetPage(int page)
     {
         _offset = Math.Max(0, (Math.Abs(page) - 1) * _limit);
