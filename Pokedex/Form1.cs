@@ -6,7 +6,7 @@ namespace Pokedex
 {
     public partial class Form1 : Form
     {
-        private const int pageSize = 5;
+        private const int pageSize = 10;
         private int page = 1;
         private readonly EntryRepo repo = new EntryRepo();
         private CancellationTokenSource? cancelable;
@@ -69,7 +69,6 @@ namespace Pokedex
             var q = new QueryParams(pageSize);
             try
             {
-                await Task.Delay(5000, cancellationToken: cancelable.Token);
                 var data = await r.FindRangeAsync(q);
                 SetView(data, q);
                 page = newPage;

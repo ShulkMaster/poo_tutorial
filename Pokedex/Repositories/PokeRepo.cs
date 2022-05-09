@@ -77,26 +77,40 @@ public class PokeRepo
             .Take(q.Limit)
             .ToListAsync(token);
 
-        if (cached.Any())
+        if (cached.Count >= q.Limit)
         {
             result.Pokemons = cached!;
             return result;
         }
 
-        var taskList = new Task<ApiPokemon?>[q.Limit];
-        for (var i = 0; i < taskList.Length; i++)
+        var chuckSize = q.Limit;
+
+        if (cached.Any())
         {
-            taskList[i] = api.GetPokemonAsync(q.Offset + 1 + i, token);
+            chuckSize = q.Limit - cached.Count;
         }
-        await Task.WhenAll(taskList);
-        var fetched = taskList
+
+        var missingPokemons = new Task<ApiPokemon?>[chuckSize];
+        var start = q.Offset + cached.Count + 1;
+        for (var i = 0; i < chuckSize; i++)
+        {
+            missingPokemons[i] = api.GetPokemonAsync(i + start, token);
+        }
+
+        await Task.WhenAll(missingPokemons);
+        var fetched = missingPokemons
             .Select(t =>
             {
-                if(t.Result is null) return null;
+                if (t.Result is null) return null;
                 return ToPokemon(t.Result);
             }).ToList();
-
-        result.Pokemons = fetched;
+        IEnumerable<Pokemon> success = fetched.Where(p => p is not null)!;
+        context.Pokemons.AddRange(success);
+        await context.SaveChangesAsync(token);
+        var newLit = new List<Pokemon?>();
+        newLit.AddRange(cached);
+        newLit.AddRange(fetched);
+        result.Pokemons = newLit;
         return result;
     }
 
