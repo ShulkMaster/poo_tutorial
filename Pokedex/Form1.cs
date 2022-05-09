@@ -18,7 +18,7 @@ namespace Pokedex
         private void SetView(PokeList list, QueryParams q)
         {
 
-            page = q.Offset / q.Limit;
+            page = 1 + q.Offset / q.Limit;
             dataGridView1.DataSource = list.Pokemons;
             label2.Text = $"Pagina {page} of {Math.Ceiling(list.Total / (float)q.Limit)}";
         }
@@ -28,16 +28,6 @@ namespace Pokedex
             BtnPrevious.Enabled = enable;
             BtnNext.Enabled = enable;
             BtnCancel.Enabled = !enable;
-        }
-
-        private void label3_Click(object sender, EventArgs e)
-        {
-            var r = new PokeRepo();
-            var pokemon = r.FindAsync(new Entry { Id = 25 });
-            pokemon.GetAwaiter().OnCompleted(() =>
-            {
-                //label3.Text = pokemon?.Result?.Name;
-            });
         }
 
         private async void BtnNext_Click(object sender, EventArgs e)
@@ -62,14 +52,15 @@ namespace Pokedex
 
         private async Task LoadPokemon(int newPage)
         {
-            if (page < 1 || cancelable is not null) return;
+            if (newPage < 1 || cancelable is not null) return;
             EnableControls(false);
             cancelable = new CancellationTokenSource();
             var r = new PokeRepo();
             var q = new QueryParams(pageSize);
+            q.SetPage(newPage);
             try
             {
-                var data = await r.FindRangeAsync(q);
+                var data = await r.FindRangeAsync(q, cancelable.Token);
                 SetView(data, q);
                 page = newPage;
             }

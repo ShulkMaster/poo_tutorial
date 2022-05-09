@@ -1,5 +1,4 @@
 ﻿using System.Text.Json;
-using System.Text.Json.Nodes;
 using Pokedex.Api.Reponses;
 using Pokedex.Api.Request;
 using Microsoft.AspNetCore.WebUtilities;

@@ -96,7 +96,6 @@ public class PokeRepo
         {
             missingPokemons[i] = api.GetPokemonAsync(i + start, token);
         }
-
         await Task.WhenAll(missingPokemons);
         var fetched = missingPokemons
             .Select(t =>
