@@ -15,12 +15,20 @@ namespace Pokedex
             InitializeComponent();
         }
 
-        private void SetView(PokeList list, QueryParams q)
+        private void SetView(PokeList list, QueryParams q, Dictionary<int, Bitmap> pics)
         {
 
             page = 1 + q.Offset / q.Limit;
             dataGridView1.DataSource = list.Pokemons;
             label2.Text = $"Pagina {page} of {Math.Ceiling(list.Total / (float)q.Limit)}";
+            var count = dataGridView1.Rows.Count;
+            for (int i = 0; i < count; i++)
+            {
+                var pokemon = list.Pokemons[i];
+                if (pokemon is null) { continue; }
+                dataGridView1.Rows[i].Cells["picture"].Value = pics[pokemon.Id];
+                dataGridView1.Rows[i].Height = 250;
+            }
         }
 
         private void EnableControls(bool enable = true)
@@ -56,12 +64,14 @@ namespace Pokedex
             EnableControls(false);
             cancelable = new CancellationTokenSource();
             var r = new PokeRepo();
+            var sRepo = new SpriteRepository();
             var q = new QueryParams(pageSize);
             q.SetPage(newPage);
             try
             {
                 var data = await r.FindRangeAsync(q, cancelable.Token);
-                SetView(data, q);
+                var pics = await sRepo.GetAllDefaultSprites(data.Pokemons, cancelable.Token);
+                SetView(data, q, pics);
                 page = newPage;
             }
             catch (TaskCanceledException ex)

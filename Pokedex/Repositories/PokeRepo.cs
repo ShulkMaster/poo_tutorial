@@ -72,6 +72,7 @@ public class PokeRepo
             return result;
         }
         var cached = await context.Pokemons
+            .Include(p => p.Sprite)
             .OrderBy(p => p.Id)
             .Skip(q.Offset)
             .Take(q.Limit)
