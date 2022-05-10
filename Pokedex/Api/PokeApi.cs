@@ -21,6 +21,8 @@ public class PokeApi
         string? url = QueryHelpers.AddQueryString(Endpoints.Pokemon.Index, query.AsDictionary());
         var response = await _client.GetStreamAsync(url, token);
         var pokemons = await JsonSerializer.DeserializeAsync<PokemonResponse>(response, _opt, token);
+        response.Dispose();
+        response.Close();
         return pokemons ?? new PokemonResponse();
     }
 
@@ -29,6 +31,8 @@ public class PokeApi
         string url = Endpoints.Pokemon.ById(id);
         var response = await _client.GetStreamAsync(url, token);
         var pokemon = await JsonSerializer.DeserializeAsync<ApiPokemon>(response, _opt, token);
+        response.Dispose();
+        response.Close();
         return pokemon;
     }
 }

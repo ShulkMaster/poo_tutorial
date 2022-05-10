@@ -27,7 +27,7 @@ namespace Pokedex
                 var pokemon = list.Pokemons[i];
                 if (pokemon is null) { continue; }
                 dataGridView1.Rows[i].Cells["picture"].Value = pics[pokemon.Id];
-                dataGridView1.Rows[i].Height = 250;
+                dataGridView1.Rows[i].Height = 200;
             }
         }
 

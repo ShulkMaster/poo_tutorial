@@ -9,6 +9,7 @@ using HttpBitmapTask = Task<(int, Bitmap?)>;
 public class SpriteRepository
 {
     private const string CacheDir = "cache/img";
+    private readonly Bitmap errorIcon = Images.NoticeError;
 
     private static string MakePath(Pokemon pokemon) => Path.Combine(CacheDir, pokemon.Name);
     private static string MakeFilePath(string basePath, string sprite, string url)
@@ -65,15 +66,14 @@ public class SpriteRepository
 
     public async Task<Dictionary<int, Bitmap>> GetAllDefaultSprites(List<Pokemon?> pokemons, CancellationToken token)
     {
-        var errorIcon = Images.NoticeError;
         var tasklist = new List<HttpBitmapTask>();
         var images = new Dictionary<int, Bitmap>();
-        const string spriteName = nameof(Sprite.FrontDefault);
+        const string spriteName = nameof(Sprite.HomeDefault);
         var _client = new HttpClient();
         foreach (var poke in pokemons)
         {
             if (poke is null) { continue; }
-            var url = poke.Sprite.FrontDefault;
+            var url = poke.Sprite.HomeDefault;
             var cached = ReadCached(poke, spriteName, url);
             if (cached is not null)
             {
