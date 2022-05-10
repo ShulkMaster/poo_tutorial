@@ -53,14 +53,14 @@ public class SpriteRepository
         var client = new HttpClient();
         var stream = await client.GetStreamAsync(url, token);
         var path = MakeFilePath(pokemon, sprite, url);
-        var fileStream = new FileStream(path, FileMode.Create);
-        var picture = new Bitmap(stream);
+        var fileStream = File.Create(path);
         await stream.CopyToAsync(fileStream, token);
+        stream.Dispose();
+        stream.Close();
+        var picture = new Bitmap(fileStream);
         fileStream.Flush();
         fileStream.Dispose();
         fileStream.Close();
-        stream.Dispose();
-        stream.Close();
         return (pokemon.Id, picture);
     }
 
