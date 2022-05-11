@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Pokedex.Api.Request;
+﻿namespace Pokedex.Api.Request;
 public class QueryParams
 {
     public const int DefaultLimit = 50;

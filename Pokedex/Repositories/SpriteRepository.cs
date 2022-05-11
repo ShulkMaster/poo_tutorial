@@ -1,10 +1,9 @@
 ﻿namespace Pokedex.Repositories;
 
-using Pokedex.Repositories.Dto;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Resources;
-using HttpBitmapTask = Task<(int, Bitmap?)>;
+using HttpBitmapTask = Task<(int id, Bitmap? pic)>;
 
 public class SpriteRepository
 {
@@ -86,7 +85,7 @@ public class SpriteRepository
         }
         await Task.WhenAll(tasklist);
 
-        tasklist.ForEach(task => images.Add(task.Result.Item1, task.Result.Item2 ?? errorIcon));
+        tasklist.ForEach(task => images.Add(task.Result.id, task.Result.pic ?? errorIcon));
         return images;
     }
 }
