@@ -6,6 +6,7 @@
         <ImplicitUsings>disable</ImplicitUsings>
         <Nullable>enable</Nullable>
         <LangVersion>8</LangVersion>
+        <Configurations>Debug;Release;X64;X64 Release</Configurations>
     </PropertyGroup>
 
 </Project>

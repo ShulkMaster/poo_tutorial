@@ -5,6 +5,7 @@
         <TargetFramework>net5.0</TargetFramework>
         <Nullable>enable</Nullable>
         <LangVersion>8</LangVersion>
+        <Configurations>Debug;Release;X64;X64 Release</Configurations>
     </PropertyGroup>
 
     <ItemGroup>
