@@ -61,6 +61,15 @@ namespace Pokedex.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to This is an error.
+        /// </summary>
+        public static string ErrorMesage {
+            get {
+                return ResourceManager.GetString("ErrorMesage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
         public static System.Drawing.Bitmap NoticeError {

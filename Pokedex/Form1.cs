@@ -1,5 +1,6 @@
 using Pokedex.ViewModels;
 using System.ComponentModel;
+using Pokedex.Views;
 
 namespace Pokedex
 {
@@ -41,15 +42,18 @@ namespace Pokedex
                 var cells = dataGridView1.Rows[i].Cells;
                 if (pok is null)
                 {
-                    cells[0].Value = null;
-                    cells[1].Value = null;
-                    cells[2].Value = null;
+                    foreach (DataGridViewCell cell in cells)
+                    {
+                        cell.Value = null;
+                    }
                     continue;
                 }
 
-                cells[0].Value = pok.Id;
-                cells[1].Value = pok.Name;
-                cells[2].Value = vm.Source.GetImage(pok);
+                cells[nameof(Pokemon.Id)].Value = pok.Id;
+                cells["NameColumn"].Value = pok.Name;
+                cells["Picture"].Value = vm.Source.GetImage(pok);
+                cells[nameof(Pokemon.BaseExperience)].Value = pok.BaseExperience;
+                cells[nameof(Pokemon.Weight)].Value = pok.Weight;
             }
         }
 
@@ -78,6 +82,30 @@ namespace Pokedex
         {
             vm.CancellPokemonLoad();
             EnableControls(true);
+        }
+
+        private void pokemonsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var poke = vm.Source[0];
+        }
+
+        private void dataGridView1_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            var p = vm.Source[e.RowIndex] ?? new Pokemon();
+            var form = new SettingsForm(p, vm.Source.GetImage(p));
+            form.ShowDialog();
+        }
+
+        private void dataGridView1_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyData == Keys.Enter)
+            {
+                e.Handled = true;
+                var rowIndex = dataGridView1.SelectedCells[0].RowIndex;
+                var p = vm.Source[rowIndex] ?? new Pokemon();
+                var form = new SettingsForm(p, vm.Source.GetImage(p));
+                form.ShowDialog();
+            }
         }
     }
 }
