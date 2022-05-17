@@ -92,7 +92,7 @@ namespace Pokedex
         private void dataGridView1_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
         {
             var p = vm.Source[e.RowIndex] ?? new Pokemon();
-            var form = new SettingsForm(p, vm.Source.GetImage(p));
+            var form = new DetailForm(p);
             form.ShowDialog();
         }
 
@@ -103,7 +103,7 @@ namespace Pokedex
                 e.Handled = true;
                 var rowIndex = dataGridView1.SelectedCells[0].RowIndex;
                 var p = vm.Source[rowIndex] ?? new Pokemon();
-                var form = new SettingsForm(p, vm.Source.GetImage(p));
+                var form = new DetailForm(p);
                 form.ShowDialog();
             }
         }

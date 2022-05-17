@@ -88,4 +88,32 @@ public class SpriteRepository
         tasklist.ForEach(task => images.Add(task.Result.id, task.Result.pic ?? errorIcon));
         return images;
     }
+
+
+    public async Task<List<Bitmap?>> GetAllSprites(Pokemon pokemon, CancellationToken token)
+    {
+        var listUrl = new List<(string sprite, string? url)>();
+        var imgs = new List<Bitmap?>(5);
+        var sp = pokemon.Sprite;
+        listUrl.Add((nameof(Sprite.FrontFemale), sp.FrontFemale));
+        listUrl.Add((nameof(Sprite.FrontDefault), sp.FrontDefault));
+        listUrl.Add((nameof(Sprite.FrontShiny), sp.FrontShiny));
+        listUrl.Add((nameof(Sprite.HomeDefault), sp.HomeDefault));
+        listUrl.Add((nameof(Sprite.HomeFemale), sp.HomeFemale));
+
+        foreach(var tupla in listUrl)
+        {
+            var bitmap = ReadCached(pokemon, tupla.sprite, tupla.url);
+            if (bitmap != null) { 
+                imgs.Add(bitmap);
+                continue;
+            }
+
+            var httpImage = await ReadHttp(pokemon, tupla.sprite, tupla.url, token);
+            imgs.Add(httpImage.pic);
+        }
+
+        return imgs;
+
+    }
 }
