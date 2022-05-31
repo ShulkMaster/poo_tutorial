@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Resources;
 using HttpBitmapTask = Task<(int id, Bitmap? pic)>;
+using PokeTupleList = Task<List<(string SpriteName, Bitmap? Pic)>>;
 
 public class SpriteRepository
 {
@@ -90,14 +91,20 @@ public class SpriteRepository
     }
 
 
-    public async Task<List<Bitmap?>> GetAllSprites(Pokemon pokemon, CancellationToken token)
+    public async PokeTupleList GetAllSprites(Pokemon pokemon, CancellationToken token)
     {
+        await Task.Delay(3000, token);
         var listUrl = new List<(string sprite, string? url)>();
-        var imgs = new List<Bitmap?>(5);
+        var imgs = new List<(string SpriteName, Bitmap? Pic)>(10);
         var sp = pokemon.Sprite;
-        listUrl.Add((nameof(Sprite.FrontFemale), sp.FrontFemale));
+        listUrl.Add((nameof(Sprite.BackDefault), sp.BackDefault));
+        listUrl.Add((nameof(Sprite.BackFemale), sp.BackFemale));
+        listUrl.Add((nameof(Sprite.BackShiny), sp.BackShiny));
+        listUrl.Add((nameof(Sprite.BackShinyFemale), sp.BackShinyFemale));
         listUrl.Add((nameof(Sprite.FrontDefault), sp.FrontDefault));
+        listUrl.Add((nameof(Sprite.FrontFemale), sp.FrontFemale));
         listUrl.Add((nameof(Sprite.FrontShiny), sp.FrontShiny));
+        listUrl.Add((nameof(Sprite.FrontShinyFemale), sp.FrontShinyFemale));
         listUrl.Add((nameof(Sprite.HomeDefault), sp.HomeDefault));
         listUrl.Add((nameof(Sprite.HomeFemale), sp.HomeFemale));
 
@@ -105,15 +112,13 @@ public class SpriteRepository
         {
             var bitmap = ReadCached(pokemon, tupla.sprite, tupla.url);
             if (bitmap != null) { 
-                imgs.Add(bitmap);
+                imgs.Add((tupla.sprite, bitmap));
                 continue;
             }
 
             var httpImage = await ReadHttp(pokemon, tupla.sprite, tupla.url, token);
-            imgs.Add(httpImage.pic);
+            imgs.Add((tupla.sprite, httpImage.pic));
         }
-
         return imgs;
-
     }
 }

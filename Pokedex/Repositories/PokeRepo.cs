@@ -3,7 +3,7 @@ using Pokedex.Api;
 using Pokedex.Api.Reponses;
 using Pokedex.Api.Request;
 using Pokedex.Repositories.Dto;
-
+using Pokedex.Data;
 namespace Pokedex.Repositories;
 
 public class PokeRepo
@@ -14,7 +14,7 @@ public class PokeRepo
     public PokeRepo()
     {
         api = new PokeApi();
-        context = new PokedexContext();
+        context = DatabaseBuilder.GetInstance();
     }
 
     private static Sprite ToSpitre(int id, ApiSprite source)

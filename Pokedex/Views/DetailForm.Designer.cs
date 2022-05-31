@@ -41,7 +41,7 @@
             this.lblXp = new System.Windows.Forms.Label();
             this.lblWeight = new System.Windows.Forms.Label();
             this.btnAccept = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
+            this.btnCancel = new System.Windows.Forms.Button();
             this.flowLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
@@ -68,6 +68,7 @@
             this.btnNext.TabIndex = 1;
             this.btnNext.Text = ">";
             this.btnNext.UseVisualStyleBackColor = true;
+            this.btnNext.Click += new System.EventHandler(this.btnNext_Click);
             // 
             // flowLayoutPanel1
             // 
@@ -127,7 +128,7 @@
             this.tableLayoutPanel1.Controls.Add(this.lblXp, 0, 1);
             this.tableLayoutPanel1.Controls.Add(this.lblWeight, 0, 2);
             this.tableLayoutPanel1.Controls.Add(this.btnAccept, 1, 2);
-            this.tableLayoutPanel1.Controls.Add(this.button2, 2, 2);
+            this.tableLayoutPanel1.Controls.Add(this.btnCancel, 2, 2);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 230);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
@@ -173,15 +174,17 @@
             this.btnAccept.TabIndex = 3;
             this.btnAccept.Text = "Aceptar";
             this.btnAccept.UseVisualStyleBackColor = true;
+            this.btnAccept.Click += new System.EventHandler(this.btnAccept_Click);
             // 
-            // button2
+            // btnCancel
             // 
-            this.button2.Location = new System.Drawing.Point(581, 153);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 23);
-            this.button2.TabIndex = 4;
-            this.button2.Text = "button2";
-            this.button2.UseVisualStyleBackColor = true;
+            this.btnCancel.Location = new System.Drawing.Point(581, 153);
+            this.btnCancel.Name = "btnCancel";
+            this.btnCancel.Size = new System.Drawing.Size(75, 23);
+            this.btnCancel.TabIndex = 4;
+            this.btnCancel.Text = "Cancel";
+            this.btnCancel.UseVisualStyleBackColor = true;
+            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
             // DetailForm
             // 
@@ -218,6 +221,6 @@
         private Label lblXp;
         private Label lblWeight;
         private Button btnAccept;
-        private Button button2;
+        private Button btnCancel;
     }
 }

@@ -1,5 +1,6 @@
 ﻿namespace Pokedex.Repositories;
 
+using Pokedex.Data;
 using Pokedex.Repositories.Dto;
 using Pokedex.Api.Request;
 using Pokedex.Api.Reponses;
@@ -8,7 +9,7 @@ using Microsoft.EntityFrameworkCore;
 
 public class EntryRepo
 {
-    PokedexContext context = new PokedexContext();
+    PokedexContext context = DatabaseBuilder.GetInstance();
 
     private static List<Entry> ToEntry(List<ApiEntry> list)
     {
