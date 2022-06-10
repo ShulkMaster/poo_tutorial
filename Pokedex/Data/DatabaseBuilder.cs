@@ -1,5 +1,4 @@
-﻿using Microsoft.Extensions.Configuration.Json;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using System.Text.Json;
 
 namespace Pokedex.Data;
@@ -17,7 +16,6 @@ public static class DatabaseBuilder
         stream.Dispose();
         DbContextOptions<PokedexContext> options;
         var optionsbuilder = new DbContextOptionsBuilder<PokedexContext>();
-        // options = optionsbuilder.UseSqlServer(configs.Local).Options;
         options = optionsbuilder.UseSqlite(configs.Lite).Options;
         var db = new PokedexContext(options);
         if (!wasCreate) {

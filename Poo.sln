@@ -20,6 +20,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Todoer", "Todoer\Todoer.csp
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Pokedex", "Pokedex\Pokedex.csproj", "{CF179773-52E8-424A-8931-D31AF2868C58}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Library2", "Library2\Library2.csproj", "{A8FD360C-4B44-4094-9E69-2FB3510CE008}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -144,6 +146,22 @@ Global
 		{CF179773-52E8-424A-8931-D31AF2868C58}.X64 Release|Any CPU.Build.0 = X64 Release|Any CPU
 		{CF179773-52E8-424A-8931-D31AF2868C58}.X64 Release|x64.ActiveCfg = X64 Release|Any CPU
 		{CF179773-52E8-424A-8931-D31AF2868C58}.X64 Release|x64.Build.0 = X64 Release|Any CPU
+		{A8FD360C-4B44-4094-9E69-2FB3510CE008}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A8FD360C-4B44-4094-9E69-2FB3510CE008}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A8FD360C-4B44-4094-9E69-2FB3510CE008}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{A8FD360C-4B44-4094-9E69-2FB3510CE008}.Debug|x64.Build.0 = Debug|Any CPU
+		{A8FD360C-4B44-4094-9E69-2FB3510CE008}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A8FD360C-4B44-4094-9E69-2FB3510CE008}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A8FD360C-4B44-4094-9E69-2FB3510CE008}.Release|x64.ActiveCfg = Release|Any CPU
+		{A8FD360C-4B44-4094-9E69-2FB3510CE008}.Release|x64.Build.0 = Release|Any CPU
+		{A8FD360C-4B44-4094-9E69-2FB3510CE008}.X64 Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A8FD360C-4B44-4094-9E69-2FB3510CE008}.X64 Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A8FD360C-4B44-4094-9E69-2FB3510CE008}.X64 Debug|x64.ActiveCfg = Debug|Any CPU
+		{A8FD360C-4B44-4094-9E69-2FB3510CE008}.X64 Debug|x64.Build.0 = Debug|Any CPU
+		{A8FD360C-4B44-4094-9E69-2FB3510CE008}.X64 Release|Any CPU.ActiveCfg = Debug|Any CPU
+		{A8FD360C-4B44-4094-9E69-2FB3510CE008}.X64 Release|Any CPU.Build.0 = Debug|Any CPU
+		{A8FD360C-4B44-4094-9E69-2FB3510CE008}.X64 Release|x64.ActiveCfg = Debug|Any CPU
+		{A8FD360C-4B44-4094-9E69-2FB3510CE008}.X64 Release|x64.Build.0 = Debug|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
