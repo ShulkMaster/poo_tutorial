@@ -9,5 +9,4 @@ public class Role
     [MaxLength(50)]
     public string Name { get; set; } = string.Empty;
     public int AccessLevel { get; set; }
-    public int Xd { get; set; }
 }

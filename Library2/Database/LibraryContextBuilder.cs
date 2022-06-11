@@ -23,7 +23,7 @@ public class LibraryContextBuilder: DbContextOptionsBuilder<LibraryContext>
     {
         var opts = new JsonSerializerOptions
         {
-            PropertyNameCaseInsensitive = true
+            PropertyNameCaseInsensitive = true,
         };
         var stream = File.OpenRead(path);
         settings = await JsonSerializer.DeserializeAsync<AppSettings>(stream,opts);
@@ -31,9 +31,11 @@ public class LibraryContextBuilder: DbContextOptionsBuilder<LibraryContext>
         await stream.DisposeAsync();
     }
 
-    public LibraryContextBuilder UseSqlite()
+    public LibraryContextBuilder UseSqServer()
     {
-       this.UseSqlServer(settings?.Local ?? "");
+       this.UseSqlServer(settings?.Local ?? "", opts =>
+       {
+       });
        return this;
     }
 }
